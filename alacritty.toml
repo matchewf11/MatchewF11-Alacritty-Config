@@ -1,8 +1,5 @@
 [general]
-# how to import other files
-# import = [
-# 	"~/.config/alacritty/otherfiles",
-# ]
+import = [ "kanagawa.toml", ]
 working_directory = "None" # start in previous working directory
 live_config_reload = true
 ipc_socket = true # unix-only
@@ -39,275 +36,79 @@ size = 13.50
 offset = { x = 0, y = 0 }
 builtin_box_drawing = false # change this if glyphs look weird
 
+[bell]
+animation = "Linear"
+duration = 0
+color = "#ffffff"
+command = "None"
 
-# Colors (Kanagawa Dragon)
-# Source https//github.com/rebelot/kanagawa.nvim
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+save_to_clipboard = true
 
-[colors.primary]
-background = '#181616'
-foreground = '#c5c9c5'
+[cursor]
+style.shape = "Beam"
+style.blinking = "Never"
+vi_mode_style.shape = "Block"
+vi_mode_style.blinking = "Off"
+#blink_interval = 750
+#blink_timeout = 5
+unfocused_hollow = true
+thickness = 0.15 # 0 -> 1.0
 
-[colors.normal]
-black = '#0d0c0c'
-blue = '#8ba4b0'
-cyan = '#8ea4a2'
-green = '#8a9a7b'
-magenta = '#a292a3'
-red = '#c4746e'
-white = '#C8C093'
-yellow = '#c4b28a'
+[terminal]
+shell = { program = "/usr/bin/zsh", args = ["-l"] }
+osc52 = "OnlyCopy"
 
-[colors.bright]
-black = '#a6a69c'
-blue = '#7FB4CA'
-cyan = '#7AA89F'
-green = '#87a987'
-magenta = '#938AA9'
-red = '#E46876'
-white = '#c5c9c5'
-yellow = '#E6C384'
+[mouse]
+hide_when_typing = false
 
-[colors.selection]
-background = '#2d4f67'
-foreground = '#c8c093'
-
-[[colors.indexed_colors]]
-index = 16
-color = '#ffa066'
-
-[[colors.indexed_colors]]
-index = 17
-color = '#ff5d62'
-
-
-
-
-# BELL
-#
-# This section documents the [bell] table of the configuration file.
-#
-# animation = "Ease" | "EaseOut" | "EaseOutSine" | "EaseOutQuad" | "EaseOutCubic" | "EaseOutQuart" | "EaseOutQuint" | "EaseOutExpo" | "EaseOutCirc" | "Linear"
-#
-#     Visual bell animation effect for flashing the screen when the visual bell is rung.
-#
-#     Default: "Linear"
-#
-# duration = <integer>
-#
-#     Duration of the visual bell flash in milliseconds. A `duration` of `0` will disable the visual bell animation.
-#
-#     Default: 0
-#
-# color = "<string>"
-#
-#     Visual bell animation color.
-#
-#     Default: "#ffffff"
-#
-# command = "<string>" | { program = "<string>", args = ["<string>",] }
-#
-#     This program is executed whenever the bell is rung.
-#
-#     When set to "None", no command will be executed.
-#
-#     Default: "None"
-#
-# SELECTION
-#
-# This section documents the [selection] table of the configuration file.
-#
-# semantic_escape_chars = "<string>"
-#
-#     This string contains all characters that are used as separators for "semantic words" in Alacritty.
-#
-#     Default: ",│`|:\"' ()[]{}<>\t"
-#
-# save_to_clipboard = true | false
-#
-#     When set to true, selected text will be copied to the primary clipboard.
-#
-#     Default: false
-#
-# CURSOR
-#
-# This section documents the [cursor] table of the configuration file.
-#
-# style = { <shape>, <blinking> }
-#
-#     shape = "Block" | "Underline" | "Beam"
-#
-#         Default: "Block"
-#
-#     blinking = "Never" | "Off" | "On" | "Always"
-#
-#         Never
-#
-#             Prevent the cursor from ever blinking
-#
-#         Off
-#
-#             Disable blinking by default
-#
-#         On
-#
-#             Enable blinking by default
-#
-#         Always
-#
-#             Force the cursor to always blink
-#
-#         Default: "Off"
-#
-# vi_mode_style = { <shape>, <blinking> } | "None"
-#
-#     If the vi mode cursor style is "None" or not specified, it will fall back to the active value of the normal cursor.
-#
-#     Default: "None"
-#
-# blink_interval = <integer>
-#
-#     Cursor blinking interval in milliseconds.
-#
-#     Default: 750
-#
-# blink_timeout = <integer>
-#
-#     Time after which cursor stops blinking, in seconds.
-#
-#     Specifying 0 will disable timeout for blinking.
-#
-#     Default: 5
-#
-# unfocused_hollow = true | false
-#
-#     When this is true, the cursor will be rendered as a hollow box when the window is not focused.
-#
-#     Default: true
-#
-# thickness = <float>
-#
-#     Thickness of the cursor relative to the cell width as floating point number from 0.0 to 1.0.
-#
-#     Default: 0.15
-#
-# TERMINAL
-#
-# This section documents the [terminal] table of the configuration file.
-#
-# shell = "<string>" | { program = "<string>", args = ["<string>",] }
-#
-#     You can set shell.program to the path of your favorite shell, e.g. /bin/zsh. Entries in shell.args are passed as arguments to the shell.
-#
-#     Default:
-#
-#         Linux/BSD/macOS: $SHELL or the user's login shell, if $SHELL is unset
-#         Windows: "powershell"
-#
-#     Example:
-#
-#         shell = { program = "/bin/zsh", args = ["-l"] }
-#
-# osc52 = "Disabled" | "OnlyCopy" | "OnlyPaste" | "CopyPaste"
-#
-#     Controls the ability to write to the system clipboard with the OSC 52 escape sequence. While this escape sequence is useful to copy contents from the remote server, allowing any application to read from the clipboard can be easily abused while not providing significant benefits over explicitly pasting text.
-#
-#     Default: "OnlyCopy"
-#
-# MOUSE
-#
-# This section documents the [mouse] table of the configuration file.
-#
-# hide_when_typing = true | false
-#
-#     When this is true, the cursor is temporarily hidden when typing.
-#
-#     Default: false
-#
 # bindings = [{ <mouse>, <mods>, <mode>, <command> | <chars> | <action> },]
-#
 #     See keyboard.bindings for full documentation on mods, mode, command, chars, and action.
-#
 #     When an application running within Alacritty captures the mouse, the `Shift` modifier can be used to suppress mouse reporting. If no action is found for the event, actions for the event without the `Shift` modifier are triggered instead.
-#
 #     mouse = "Middle" | "Left" | "Right" | "Back" | "Forward" | <integer>
-#
 #         Mouse button which needs to be pressed to trigger this binding.
-#
 #     action = <keyboard.bindings.action> | "ExpandSelection"
-#
 #         ExpandSelection
-#
 #             Expand the selection to the current mouse cursor location.
-#
 #     Example:
-#
 #         [mouse]
 #         bindings = [
 #         { mouse = "Right", mods = "Control", action = "Paste" },
 #         ]
-#
+
+
 # HINTS
-#
 # This section documents the [hints] table of the configuration file.
-#
 # Terminal hints can be used to find text or hyperlinks in the visible part of the terminal and pipe it to other applications.
-#
 # alphabet = "<string>"
-#
 #     Keys used for the hint labels.
-#
 #     Default: "jfkdls;ahgurieowpq"
-#
 # enabled = [{ <regex>, <hyperlinks>, <post_processing>, <persist>, <action>, <command>, <binding>, <mouse> },]
-#
 # Array with all available hints.
-#
 # Each hint must have at least one of regex or hyperlinks and either an action or a command.
-#
 #     regex = "<string>"
-#
 #         Regex each line will be compared against.
-#
 #     hyperlinks = true | false
-#
 #         When this is true, all OSC 8 escape sequence hyperlinks will be included in the hints.
-#
 #     post_processing = true | false
-#
 #         When this is true, heuristics will be used to shorten the match if there are characters likely not to be part of the hint (e.g. a trailing .). This is most useful for URIs and applies only to regex matches.
-#
 #     persist = true | false
-#
 #         When this is true, hints remain persistent after selection.
-#
 #     action = "Copy" | "Paste" | "Select" | "MoveViModeCursor"
-#
 #         Copy
-#
 #             Copy the hint's text to the clipboard.
-#
 #         Paste
-#
 #             Paste the hint's text to the terminal or search.
-#
 #         Select
-#
 #             Select the hint's text.
-#
 #         MoveViModeCursor
-#
 #             Move the vi mode cursor to the beginning of the hint.
-#
 #     command = "<string>" | { program = "<string>", args = ["<string>",] }
-#
 #         Command which will be executed when the hint is clicked or selected with the binding.
-#
 #         The hint's text is always attached as the last argument.
-#
 #     binding = { key = "<string>", mods = "<string>", mode = "<string>" }
-#
 #         See keyboard.bindings for documentation on available values.
-#
 #         This controls which key binding is used to start the keyboard hint selection process.
 #
 #     mouse = { mods = "<string>", enabled = true | false }
@@ -796,16 +597,6 @@ color = '#ff5d62'
 #     Default: false
 #
 # SEE ALSO
-#
 # alacritty(1), alacritty-msg(1), alacritty-bindings(5)
-# BUGS
-#
-# Found a bug? Please report it at https://github.com/alacritty/alacritty/issues.
-# MAINTAINERS
-#
-#     Christian Duerr <contact@christianduerr.com>
-#
-#     Kirill Chibisov <contact@kchibisov.com>
 
-# make sure to add knaagawa themeing
 # take a brief look into alacritty ecosystem
