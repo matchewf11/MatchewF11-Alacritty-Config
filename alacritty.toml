@@ -62,541 +62,368 @@ osc52 = "OnlyCopy"
 
 [mouse]
 hide_when_typing = false
-
 # bindings = [{ <mouse>, <mods>, <mode>, <command> | <chars> | <action> },]
-#     See keyboard.bindings for full documentation on mods, mode, command, chars, and action.
-#     When an application running within Alacritty captures the mouse, the `Shift` modifier can be used to suppress mouse reporting. If no action is found for the event, actions for the event without the `Shift` modifier are triggered instead.
-#     mouse = "Middle" | "Left" | "Right" | "Back" | "Forward" | <integer>
-#         Mouse button which needs to be pressed to trigger this binding.
-#     action = <keyboard.bindings.action> | "ExpandSelection"
-#         ExpandSelection
-#             Expand the selection to the current mouse cursor location.
-#     Example:
-#         [mouse]
-#         bindings = [
-#         { mouse = "Right", mods = "Control", action = "Paste" },
-#         ]
 
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
 
-# HINTS
-# This section documents the [hints] table of the configuration file.
-# Terminal hints can be used to find text or hyperlinks in the visible part of the terminal and pipe it to other applications.
-# alphabet = "<string>"
-#     Keys used for the hint labels.
-#     Default: "jfkdls;ahgurieowpq"
-# enabled = [{ <regex>, <hyperlinks>, <post_processing>, <persist>, <action>, <command>, <binding>, <mouse> },]
-# Array with all available hints.
-# Each hint must have at least one of regex or hyperlinks and either an action or a command.
-#     regex = "<string>"
-#         Regex each line will be compared against.
-#     hyperlinks = true | false
-#         When this is true, all OSC 8 escape sequence hyperlinks will be included in the hints.
-#     post_processing = true | false
-#         When this is true, heuristics will be used to shorten the match if there are characters likely not to be part of the hint (e.g. a trailing .). This is most useful for URIs and applies only to regex matches.
-#     persist = true | false
-#         When this is true, hints remain persistent after selection.
-#     action = "Copy" | "Paste" | "Select" | "MoveViModeCursor"
-#         Copy
-#             Copy the hint's text to the clipboard.
-#         Paste
-#             Paste the hint's text to the terminal or search.
-#         Select
-#             Select the hint's text.
-#         MoveViModeCursor
-#             Move the vi mode cursor to the beginning of the hint.
-#     command = "<string>" | { program = "<string>", args = ["<string>",] }
-#         Command which will be executed when the hint is clicked or selected with the binding.
-#         The hint's text is always attached as the last argument.
-#     binding = { key = "<string>", mods = "<string>", mode = "<string>" }
-#         See keyboard.bindings for documentation on available values.
-#         This controls which key binding is used to start the keyboard hint selection process.
-#
-#     mouse = { mods = "<string>", enabled = true | false }
-#
-#         See keyboard.bindings for documentation on available mods.
-#
-#         The enabled field controls if the hint should be underlined when hovering over the hint text with all mods pressed.
-#
-#     Default:
-#
-#         [[hints.enabled]]
-#         command = "xdg-open" # On Linux/BSD
-#         # command = "open" # On macOS
-#         # command = { program = "cmd", args = [ "/c", "start", "" ] } # On Windows
-#         hyperlinks = true
-#         post_processing = true
-#         persist = false
-#         mouse.enabled = true
-#         binding = { key = "O", mods = "Control|Shift" }
-#         regex =
-#
-# "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+"
-# KEYBOARD
-#
-# This section documents the [keyboard] table of the configuration file.
-#
-# bindings = [{ <key>, <mods>, <mode>, <command> | <chars> | <action> },]
-#
-#     To unset a default binding, you can use the action "ReceiveChar" to remove it or "None" to inhibit any action.
-#
-#     Multiple keybindings can be triggered by a single key press and will be executed in the order they are defined in.
-#
-#     key = "<string>"
-#
-#         The regular keys like "A", "0", and "Я" can be mapped directly without any special syntax. Full list of named keys like "F1" and the syntax for dead keys can be found here:
-#
-#         https://docs.rs/winit/latest/winit/keyboard/enum.NamedKey.html
-#         https://docs.rs/winit/latest/winit/keyboard/enum.Key.html#variant.Dead
-#
-#         Numpad keys are prefixed by Numpad: "NumpadEnter" | "NumpadAdd" | "NumpadComma" | "NumpadDecimal" | "NumpadDivide" | "NumpadEquals" | "NumpadSubtract" | "NumpadMultiply" | "Numpad[0-9]".
-#
-#         The key field also supports using scancodes, which are specified as a decimal number.
-#
-#     mods = "Command" | "Control" | "Option" | "Super" | "Shift" | "Alt"
-#
-#         Multiple modifiers can be combined using |, like this: "Control | Shift".
-#
-#     mode = "AppCursor" | "AppKeypad" | "Search" | "Alt" | "Vi"
-#
-#         This defines a terminal mode which must be active for this binding to have an effect.
-#
-#         Prepending ~ to a mode will require the mode to not = be active for the binding to take effect.
-#
-#         Multiple modes can be combined using |, like this: "~Vi|Search".
-#
-#     command = "<string>" | { program = "<string>", args = ["<string>",] }
-#
-#         Fork and execute the specified command.
-#
-#     chars = "<string>"
-#
-#         Writes the specified string to the terminal.
-#
-#     action
-#
-#         ReceiveChar
-#
-#             Allow receiving char input.
-#
-#         None
-#
-#             No action.
-#
-#         Paste
-#
-#             Paste contents of system clipboard.
-#
-#         Copy
-#
-#             Store current selection into clipboard.
-#
-#         IncreaseFontSize
-#
-#             Increase font size.
-#
-#         DecreaseFontSize
-#
-#             Decrease font size.
-#
-#         ResetFontSize
-#
-#             Reset font size to the config value.
-#
-#         ScrollPageUp
-#
-#             Scroll exactly one page up.
-#
-#         ScrollPageDown
-#
-#             Scroll exactly one page down.
-#
-#         ScrollHalfPageUp
-#
-#             Scroll half a page up.
-#
-#         ScrollHalfPageDown
-#
-#             Scroll half a page down.
-#
-#         ScrollLineUp
-#
-#             Scroll one line up.
-#
-#         ScrollLineDown
-#
-#             Scroll one line down.
-#
-#         ScrollToTop
-#
-#             Scroll all the way to the top.
-#
-#         ScrollToBottom
-#
-#             Scroll all the way to the bottom.
-#
-#         ClearHistory
-#
-#             Clear the display buffer(s) to remove history.
-#
-#         Hide
-#
-#             Hide the Alacritty window.
-#
-#         Minimize
-#
-#             Minimize the Alacritty window.
-#
-#         Quit
-#
-#             Quit Alacritty.
-#
-#         ClearLogNotice
-#
-#             Clear warning and error notices.
-#
-#         SpawnNewInstance
-#
-#             Spawn a new instance of Alacritty.
-#
-#         CreateNewWindow
-#
-#             Create a new Alacritty window.
-#
-#         ToggleFullscreen
-#
-#             Toggle fullscreen.
-#
-#         ToggleMaximized
-#
-#             Toggle maximized.
-#
-#         ClearSelection
-#
-#             Clear active selection.
-#
-#         ToggleViMode
-#
-#             Toggle vi mode.
-#
-#         SearchForward
-#
-#             Start a forward buffer search.
-#
-#         SearchBackward
-#
-#             Start a backward buffer search.
-#
-#         Vi mode actions:
-#
-#         Up
-#
-#             Move up.
-#
-#         Down
-#
-#             Move down.
-#
-#         Left
-#
-#             Move left.
-#
-#         Right
-#
-#             Move right.
-#
-#         First
-#
-#             First column, or beginning of the line when already at the first column.
-#
-#         Last
-#
-#             Last column, or beginning of the line when already at the last column.
-#
-#         FirstOccupied
-#
-#             First non-empty cell in this terminal row, or first non-empty cell of the line when already at the first cell of the row.
-#
-#         High
-#
-#             Move to top of screen.
-#
-#         Middle
-#
-#             Move to center of screen.
-#
-#         Low
-#
-#             Move to bottom of screen.
-#
-#         SemanticLeft
-#
-#             Move to start of semantically separated word.
-#
-#         SemanticRight
-#
-#             Move to start of next semantically separated word.
-#
-#         SemanticLeftEnd
-#
-#             Move to end of previous semantically separated word.
-#
-#         SemanticRightEnd
-#
-#             Move to end of semantically separated word.
-#
-#         WordLeft
-#
-#             Move to start of whitespace separated word.
-#
-#         WordRight
-#
-#             Move to start of next whitespace separated word.
-#
-#         WordLeftEnd
-#
-#             Move to end of previous whitespace separated word.
-#
-#         WordRightEnd
-#
-#             Move to end of whitespace separated word.
-#
-#         Bracket
-#
-#             Move to opposing bracket.
-#
-#         ToggleNormalSelection
-#
-#             Toggle normal vi selection.
-#
-#         ToggleLineSelection
-#
-#             Toggle line vi selection.
-#
-#         ToggleBlockSelection
-#
-#             Toggle block vi selection.
-#
-#         ToggleSemanticSelection
-#
-#             Toggle semantic vi selection.
-#
-#         SearchNext
-#
-#             Jump to the beginning of the next match.
-#
-#         SearchPrevious
-#
-#             Jump to the beginning of the previous match.
-#
-#         SearchStart
-#
-#             Jump to the next start of a match to the left of the origin.
-#
-#         SearchEnd
-#
-#             Jump to the next end of a match to the right of the origin.
-#
-#         Open
-#
-#             Launch the URL below the vi mode cursor.
-#
-#         CenterAroundViCursor
-#
-#             Centers the screen around the vi mode cursor.
-#
-#         InlineSearchForward
-#
-#             Search forward within the current line.
-#
-#         InlineSearchBackward
-#
-#             Search backward within the current line.
-#
-#         InlineSearchForwardShort
-#
-#             Search forward within the current line, stopping just short of the character.
-#
-#         InlineSearchBackwardShort
-#
-#             Search backward within the current line, stopping just short of the character.
-#
-#         InlineSearchNext
-#
-#             Jump to the next inline search match.
-#
-#         InlineSearchPrevious
-#
-#             Jump to the previous inline search match.
-#
-#         Search actions:
-#
-#         SearchFocusNext
-#
-#             Move the focus to the next search match.
-#
-#         SearchFocusPrevious
-#
-#             Move the focus to the previous search match.
-#
-#         SearchConfirm
-#
-#             Confirm the active search.
-#
-#         SearchCancel
-#
-#             Cancel the active search.
-#
-#         SearchClear
-#
-#             Reset the search regex.
-#
-#         SearchDeleteWord
-#
-#             Delete the last word in the search regex.
-#
-#         SearchHistoryPrevious
-#
-#             Go to the previous regex in the search history.
-#
-#         SearchHistoryNext
-#
-#             Go to the next regex in the search history.
-#
-#         macOS exclusive:
-#
-#         ToggleSimpleFullscreen
-#
-#             Enter fullscreen without occupying another space.
-#
-#         HideOtherApplications
-#
-#             Hide all windows other than Alacritty.
-#
-#         CreateNewTab
-#
-#             Create new window in a tab.
-#
-#         SelectNextTab
-#
-#             Select next tab.
-#
-#         SelectPreviousTab
-#
-#             Select previous tab.
-#
-#         SelectTab1
-#
-#             Select the first tab.
-#
-#         SelectTab2
-#
-#             Select the second tab.
-#
-#         SelectTab3
-#
-#             Select the third tab.
-#
-#         SelectTab4
-#
-#             Select the fourth tab.
-#
-#         SelectTab5
-#
-#             Select the fifth tab.
-#
-#         SelectTab6
-#
-#             Select the sixth tab.
-#
-#         SelectTab7
-#
-#             Select the seventh tab.
-#
-#         SelectTab8
-#
-#             Select the eighth tab.
-#
-#         SelectTab9
-#
-#             Select the ninth tab.
-#
-#         SelectLastTab
-#
-#             Select the last tab.
-#
-#         Linux/BSD exclusive:
-#
-#         CopySelection
-#
-#             Copy from the selection buffer.
-#
-#         PasteSelection
-#
-#             Paste from the selection buffer.
-#
-# Default: See alacritty-bindings(5)
-#
-# Example:
-#
-#     [keyboard]
-#     bindings = [
-#     { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-#     { key = "L", mods = "Control|Shift", chars = "l" },
-#     ]
-#
-# DEBUG
-#
-# This section documents the [debug] table of the configuration file.
-#
-# Debug options are meant to help troubleshoot issues with Alacritty. These can change or be removed entirely without warning, so their stability shouldn't be relied upon.
-#
-# render_timer = true | false
-#
-#     Display the time it takes to draw each frame.
-#
-#     Default: false
-#
-# persistent_logging = true | false
-#
-#     Keep the log file after quitting Alacritty.
-#
-#     Default: false
-#
-# log_level = "Off" | "Error" | "Warn" | "Info" | "Debug" | "Trace"
-#
-#     Default: "Warn"
-#
-#     To add extra libraries to logging ALACRITTY_EXTRA_LOG_TARGETS variable can be used.
-#
-#     Example:
-#
-#         ALACRITTY_EXTRA_LOG_TARGETS="winit;vte" alacritty -vvv
-#
-# renderer = "glsl3" | "gles2" | "gles2pure" | "None"
-#
-#     Force use of a specific renderer, "None" will use the highest available one.
-#
-#     Default: "None"
-#
-# print_events = true | false
-#
-#     Log all received window events.
-#
-#     Default: false
-#
-# highlight_damage = true | false
-#
-#     Highlight window damage information.
-#
-#     Default: false
-#
-# prefer_egl = true | false
-#
-#     Use EGL as display API if the current platform allows it. Note that transparency may not work with EGL on Linux/BSD.
-#
-#     Default: false
-#
-# SEE ALSO
-# alacritty(1), alacritty-msg(1), alacritty-bindings(5)
+#enabled = [{ <regex>, <hyperlinks>, <post_processing>,
+#<persist>, <action>, <command>, <binding>, <mouse> },]
 
-# take a brief look into alacritty ecosystem
+# opens links in firefox
+[[hints.enabled]]
+regex = "(https://|http://)[^\\s<>\"']+"
+hyperlinks = true
+post_processing = true
+persist = false
+command = { program = "firefox", args = [] }
+binding = { key = "U", mods = "Control|Shift" }
+mouse.enabled = true
+
+[keyboard]
+bindings = [
+	# { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+	# { key = "L", mods = "Control|Shift", chars = "l" },
+	#{ <key>, <mods>, <mode>, <command> | <chars> | <action> }
+	# can trigger multiple keybindings in key = "<string>"
+	# mods = "Command", "Control", "Option", "Super", "Shift", "Alt"
+	# bar to apply multiple
+	# mode = "AppCursor", "AppKeypad", "Search", "Alt", "Vi"
+	# ~ is not for mode, can be combined with |
+	#command = string | {program = string, args = [string]} #fork+execute
+	# chars = string #write cmd to terminal
+]
+
+# Action                | Description
+# ----------------------|------------------------------------------------------
+# ReceiveChar           | Allow receiving character input
+# None                  | Do nothing
+# Paste                 | Paste from system clipboard
+# Copy                  | Copy current selection to system clipboard
+# IncreaseFontSize      | Increase font size
+# DecreaseFontSize      | Decrease font size
+# ResetFontSize         | Reset font size to config value
+# ScrollPageUp          | Scroll one page up
+# ScrollPageDown        | Scroll one page down
+# ScrollHalfPageUp      | Scroll half a page up
+# ScrollHalfPageDown    | Scroll half a page down
+# ScrollLineUp          | Scroll one line up
+# ScrollLineDown        | Scroll one line down
+# ScrollToTop           | Scroll to top of scrollback buffer
+# ScrollToBottom        | Scroll to bottom of scrollback buffer
+# ClearHistory          | Clear scrollback history
+# ClearSelection        | Deselect active selection
+# ClearLogNotice        | Clear error/warning log notices
+# Hide                  | Hide the Alacritty window
+# Minimize              | Minimize the Alacritty window
+# Quit                  | Quit Alacritty
+# SpawnNewInstance      | Launch a new Alacritty instance
+# CreateNewWindow       | Launch a new Alacritty window
+# ToggleFullscreen      | Toggle fullscreen
+# ToggleMaximized       | Toggle maximized
+# ToggleViMode          | Toggle vi (cursor) mode
+# --------------------------|---------------------------------------------------
+# SearchForward            | Start forward search
+# SearchBackward           | Start backward search
+# SearchFocusNext          | Focus next search match
+# SearchFocusPrevious      | Focus previous search match
+# SearchConfirm            | Confirm active search
+# SearchCancel             | Cancel active search
+# SearchClear              | Clear search regex
+# SearchDeleteWord         | Delete last word from search input
+# SearchHistoryPrevious    | Go to previous regex in history
+# SearchHistoryNext        | Go to next regex in history
+# -----------------------------------------------------------
+# InlineSearchForward         | Search forward in current line
+# InlineSearchBackward        | Search backward in current line
+# InlineSearchForwardShort    | Like above, but stop short of char
+# InlineSearchBackwardShort   | Same, but in reverse
+# InlineSearchNext            | Jump to next inline match
+# InlineSearchPrevious        | Jump to previous inline match
+
+# ViMode Navigation
+# --------------------------|------------------------------------------
+# Up                       | Move up
+# Down                     | Move down
+# Left                     | Move left
+# Right                    | Move right
+# First                    | Move to first column/start of line
+# Last                     | Move to last column/end of line
+# FirstOccupied            | Move to first non-empty cell
+# High                     | Move to top of screen
+# Middle                   | Move to center of screen
+# Low                      | Move to bottom of screen
+# SemanticLeft             | Move to start of previous word
+# SemanticRight            | Move to start of next word
+# SemanticLeftEnd          | Move to end of previous word
+# SemanticRightEnd         | Move to end of next word
+# WordLeft                 | Move to start of whitespace-separated word
+# WordRight                | Move to next word
+# WordLeftEnd              | Move to end of previous word
+# WordRightEnd             | Move to end of next word
+# Bracket                  | Jump to matching bracket
+# CenterAroundViCursor     | Center view on vi cursor
+# Open                     | Launch URL at vi cursor
+#
+# ViMOde selections
+# ToggleNormalSelection     | Toggle normal selection
+# ToggleLineSelection       | Toggle line selection
+# ToggleBlockSelection      | Toggle block (rectangular) selection
+# ToggleSemanticSelection   | Toggle semantic unit selection
+#
+# ViMode Search Navigation
+# SearchNext                | Jump to beginning of next match
+# SearchPrevious            | Jump to beginning of previous match
+# SearchStart               | Jump to next match *start* to the left
+# SearchEnd                 | Jump to next match *end* to the right
+#
+# CopySelection             | Copy from selection buffer
+# PasteSelection            | Paste from selection buffer
+
+# Alacritty
+# -h, --help
+#     Prints help information.
+# --hold
+#     Remain open after child process exits.
+# --daemon
+#     Do not spawn an initial window.
+# --print-events
+#     Print all events to STDOUT.
+# -q
+#     Reduces the level of verbosity (the min level is -qq).
+# --ref-test
+#     Generates ref test
+# -v
+#     Increases the level of verbosity (the max level is -vvv).
+# -V, --version
+#     Prints version information.
+# OPTIONS
+# --class <GENERAL> | <GENERAL>,<INSTANCE>
+#     Defines the window class hint on Linux.
+#     When only the general class is passed, instance will be set to the same value.
+#     Default: Alacritty,Alacritty
+# -e, --command <COMMAND>...
+#     Command and args to execute (must be last argument).
+# --config-file <CONFIG_FILE>
+#     Specify alternative configuration file.
+#     Alacritty doesn't create the config file for you, but it looks for one in the following locations on UNIX systems:
+#             $XDG_CONFIG_HOME/alacritty/alacritty.toml
+#             $XDG_CONFIG_HOME/alacritty.toml
+#             $HOME/.config/alacritty/alacritty.toml
+#             $HOME/.alacritty.toml
+#     On Windows, the config file will be looked for in:
+#             %APPDATA%\alacritty\alacritty.toml
+# --embed <PARENT>
+#     X11 window ID to embed Alacritty within (decimal or hexadecimal with 0x prefix).
+# -o, --option <OPTION>...
+#     Override configuration file options.
+#     Example: alacritty -o 'cursor.style="Beam"'
+# --socket <SOCKET>
+#     Path for IPC socket creation.
+# -T, --title <TITLE>
+#     Defines the window title.
+#     Default: Alacritty
+# --working-directory <WORKING_DIRECTORY>
+#     Start the shell in the specified working directory.
+# SUBCOMMANDS
+# msg
+#     Send IPC socket messages (see alacritty-msg(1)).
+# migrate
+#     Migrate the configuration file.
+#     -c, --config-file <CONFIG_FILE>
+#         Path to the configuration file.
+#     -d, --dry-run
+#         Only output TOML config to STDOUT.
+#     -i, --skip-imports
+#         Do not recurse over imports.
+#     --skip-renames
+#         Do not move renamed fields to their new location.
+#     -s, --silent
+#         Do not output to STDOUT.
+#     -h, --help
+#         Print help information.
+
+# Default Keymaps
+# MOUSE BINDINGS
+# mouse 	mods 	action
+# "Right" 		"ExpandSelection"
+# "Right" 	"Control" 	"ExpandSelection"
+# "Middle" 	"~Vi" 	"PasteSelection"
+# KEY BINDINGS
+# key 	mods 	mode 	action / chars
+# "Paste" 			"Paste"
+# "Copy" 			"Copy"
+# "L" 	"Control" 		"ClearLogNotice"
+# "Paste" 		"Vi|Search" 	"Paste"
+# "L" 	"Control" 	"~Vi|~Search" 	chars: "\u000c"
+# "PageUp" 	"Shift" 	"~Alt" 	"ScrollPageUp"
+# "PageDown" 	"Shift" 	"~Alt" 	"ScrollPageDown"
+# "Home" 	"Shift" 	"~Alt" 	"ScrollToTop"
+# "End" 	"Shift" 	"~Alt" 	"ScrollToBottom"
+# Vi Mode
+# key 	mods 	mode 	action
+# "Space" 	"Shift|Control" 	"~Search" 	"ToggleViMode"
+# "Space" 	"Shift|Control" 	"Vi|~Search" 	"ScrollToBottom"
+# "Escape" 		"Vi|~Search" 	"ClearSelection"
+# "I" 		"Vi|~Search" 	"ToggleViMode"
+# "I" 		"Vi|~Search" 	"ScrollToBottom"
+# "C" 	"Control" 	"Vi|~Search" 	"ToggleViMode"
+# "Y" 	"Control" 	"Vi|~Search" 	"ScrollLineUp"
+# "E" 	"Control" 	"Vi|~Search" 	"ScrollLineDown"
+# "G" 		"Vi|~Search" 	"ScrollToTop"
+# "G" 	"Shift" 	"Vi|~Search" 	"ScrollToBottom"
+# "B" 	"Control" 	"Vi|~Search" 	"ScrollPageUp"
+# "F" 	"Control" 	"Vi|~Search" 	"ScrollPageDown"
+# "U" 	"Control" 	"Vi|~Search" 	"ScrollHalfPageUp"
+# "D" 	"Control" 	"Vi|~Search" 	"ScrollHalfPageDown"
+# "Y" 		"Vi|~Search" 	"Copy"
+# "Y" 		"Vi|~Search" 	"ClearSelection"
+# "Copy" 		"Vi|~Search" 	"ClearSelection"
+# "V" 		"Vi|~Search" 	"ToggleNormalSelection"
+# "V" 	"Shift" 	"Vi|~Search" 	"ToggleLineSelection"
+# "V" 	"Control" 	"Vi|~Search" 	"ToggleBlockSelection"
+# "V" 	"Alt" 	"Vi|~Search" 	"ToggleSemanticSelection"
+# "Enter" 		"Vi|~Search" 	"Open"
+# "Z" 		"Vi|~Search" 	"CenterAroundViCursor"
+# "F" 		"Vi|~Search" 	"InlineSearchForward"
+# "F" 	"Shift" 	"Vi|~Search" 	"InlineSearchBackward"
+# "T" 		"Vi|~Search" 	"InlineSearchForwardShort"
+# "T" 	"Shift" 	"Vi|~Search" 	"InlineSearchBackwardShort"
+# ";" 		"Vi|~Search" 	"InlineSearchNext"
+# "," 		"Vi|~Search" 	"InlineSearchPrevious"
+# "K" 		"Vi|~Search" 	"Up"
+# "J" 		"Vi|~Search" 	"Down"
+# "H" 		"Vi|~Search" 	"Left"
+# "L" 		"Vi|~Search" 	"Right"
+# "ArrowUp" 		"Vi|~Search" 	"Up"
+# "ArrowDown" 		"Vi|~Search" 	"Down"
+# "ArrowLeft" 		"Vi|~Search" 	"Left"
+# "ArrowRight" 		"Vi|~Search" 	"Right"
+# "0" 		"Vi|~Search" 	"First"
+# "$" 	"Shift" 	"Vi|~Search" 	"Last"
+# "Home" 		"Vi|~Search" 	"First"
+# "End" 		"Vi|~Search" 	"Last"
+# "^" 	"Shift" 	"Vi|~Search" 	"FirstOccupied"
+# "H" 	"Shift" 	"Vi|~Search" 	"High"
+# "M" 	"Shift" 	"Vi|~Search" 	"Middle"
+# "L" 	"Shift" 	"Vi|~Search" 	"Low"
+# "B" 		"Vi|~Search" 	"SemanticLeft"
+# "W" 		"Vi|~Search" 	"SemanticRight"
+# "E" 		"Vi|~Search" 	"SemanticRightEnd"
+# "B" 	"Shift" 	"Vi|~Search" 	"WordLeft"
+# "W" 	"Shift" 	"Vi|~Search" 	"WordRight"
+# "E" 	"Shift" 	"Vi|~Search" 	"WordRightEnd"
+# "%" 	"Shift" 	"Vi|~Search" 	"Bracket"
+# "/" 		"Vi|~Search" 	"SearchForward"
+# "?" 	"Shift" 	"Vi|~Search" 	"SearchBackward"
+# "N" 		"Vi|~Search" 	"SearchNext"
+# "N" 	"Shift" 	"Vi|~Search" 	"SearchPrevious"
+# Search Mode
+# key 	mods 	mode 	action
+# "Enter" 		"Search|Vi" 	"SearchConfirm"
+# "Escape" 		"Search" 	"SearchCancel"
+# "C" 	"Control" 	"Search" 	"SearchCancel"
+# "U" 	"Control" 	"Search" 	"SearchClear"
+# "W" 	"Control" 	"Search" 	"SearchDeleteWord"
+# "P" 	"Control" 	"Search" 	"SearchHistoryPrevious"
+# "N" 	"Control" 	"Search" 	"SearchHistoryNext"
+# "ArrowUp" 		"Search" 	"SearchHistoryPrevious"
+# "ArrowDown" 		"Search" 	"SearchHistoryNext"
+# "Enter" 		"Search|~Vi" 	"SearchFocusNext"
+# Windows, Linux, and BSD only
+# key 	mods 	mode 	action
+# "V" 	"Control|Shift" 	"~Vi" 	"Paste"
+# "V" 	"Control|Shift" 	"Vi|Search" 	"Paste"
+# "C" 	"Control|Shift" 		"Copy"
+# "F" 	"Control|Shift" 	"~Search" 	"SearchForward"
+# "B" 	"Control|Shift" 	"~Search" 	"SearchBackward"
+# "C" 	"Control|Shift" 	"Vi|~Search" 	"ClearSelection"
+# "Insert" 	"Shift" 		"PasteSelection"
+# "0" 	"Control" 		"ResetFontSize"
+# "=" 	"Control" 		"IncreaseFontSize"
+# "+" 	"Control" 		"IncreaseFontSize"
+# "NumpadAdd" 	"Control" 		"IncreaseFontSize"
+# "-" 	"Control" 		"DecreaseFontSize"
+# "NumpadSubtract" 	"Control" 		"DecreaseFontSize"
+# Windows only
+# key 	mods 	mode 	action
+# "Enter" 	"Alt" 		"ToggleFullscreen"
+# macOS only
+# key 	mods 	mode 	action / chars
+# "K" 	"Command" 	"~Vi|~Search" 	chars: "\u000c"
+# "K" 	"Command" 	"~Vi|~Search" 	"ClearHistory"
+# "0" 	"Command" 		"ResetFontSize"
+# "=" 	"Command" 		"IncreaseFontSize"
+# "+" 	"Command" 		"IncreaseFontSize"
+# "NumpadAdd" 	"Command" 		"IncreaseFontSize"
+# "-" 	"Command" 		"DecreaseFontSize"
+# "NumpadSubtract" 	"Command" 		"DecreaseFontSize"
+# "V" 	"Command" 	"~Vi" 	"Paste"
+# "V" 	"Command" 	"Vi|Search" 	"Paste"
+# "C" 	"Command" 		"Copy"
+# "C" 	"Command" 	"Vi|~Search" 	"ClearSelection"
+# "H" 	"Command" 		"Hide"
+# "H" 	"Command|Alt" 		"HideOtherApplications"
+# "M" 	"Command" 		"Minimize"
+# "Q" 	"Command" 		"Quit"
+# "W" 	"Command" 		"Quit"
+# "N" 	"Command" 		"CreateNewWindow"
+# "T" 	"Command" 		"CreateNewTab"
+# "F" 	"Command|Control" 		"ToggleFullscreen"
+# "F" 	"Command" 	"~Search" 	"SearchForward"
+# "B" 	"Command" 	"~Search" 	"SearchBackward"
+# "]" 	"Command|Shift" 		"SelectNextTab"
+# "[" 	"Command|Shift" 		"SelectPreviousTab"
+# "Tab" 	"Command" 		"SelectNextTab"
+# "Tab" 	"Command|Shift" 		"SelectPreviousTab"
+# "1" 	"Command" 		"SelectTab1"
+# "2" 	"Command" 		"SelectTab2"
+# "3" 	"Command" 		"SelectTab3"
+# "4" 	"Command" 		"SelectTab4"
+# "5" 	"Command" 		"SelectTab5"
+# "6" 	"Command" 		"SelectTab6"
+# "7" 	"Command" 		"SelectTab7"
+# "8" 	"Command" 		"SelectTab8"
+# "9" 	"Command" 		"SelectLastTab"
+
+# NAME
+# alacritty-msg - Send messages to Alacritty.
+# SYNOPSIS
+# This command communicates with running Alacritty instances through a socket, making it possible to control Alacritty without directly accessing it.
+# OPTIONS
+# -s, --socket <SOCKET>
+#     Path for IPC socket communication.
+# MESSAGES
+# create-window
+#     Create a new window in the same Alacritty process.
+#     FLAGS
+#         --hold
+#             Remain open after child process exits.
+#     OPTIONS
+#         --working-directory <WORKING_DIRECTORY>
+#             Start the shell in the specified working directory.
+#         -T, --title <TITLE>
+#             Defines the window title.
+#             Default: Alacritty
+#         --class <GENERAL> | <GENERAL>,<INSTANCE>
+#             Defines window class/app_id on X11/Wayland.
+#             Default: Alacritty,Alacritty
+#         -o, --option <OPTION>...
+#             Override configuration file options.
+#             Example: alacritty msg create-window -o 'cursor.style="Beam"'
+#         -e, --command <COMMAND>...
+#             Command and args to execute (must be last argument).
+# config
+#     Update the Alacritty configuration.
+#     ARGS
+#         <CONFIG_OPTIONS>...
+#             Configuration file options.
+#             Example: alacritty msg config 'cursor.style="Beam"'
+#     FLAGS
+#         -r, --reset
+#             Clear all runtime configuration changes.
+#     OPTIONS
+#         -w, --window-id <WINDOW_ID>
+#             Window ID for the new config.
+#             Use -1 to apply this change to all windows.
+#             Default: $ALACRITTY_WINDOW_ID
