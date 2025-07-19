@@ -180,70 +180,56 @@ bindings = [
 # CopySelection             | Copy from selection buffer
 # PasteSelection            | Paste from selection buffer
 
-# Alacritty
-# -h, --help
-#     Prints help information.
-# --hold
-#     Remain open after child process exits.
-# --daemon
-#     Do not spawn an initial window.
-# --print-events
-#     Print all events to STDOUT.
-# -q
-#     Reduces the level of verbosity (the min level is -qq).
-# --ref-test
-#     Generates ref test
-# -v
-#     Increases the level of verbosity (the max level is -vvv).
-# -V, --version
-#     Prints version information.
-# OPTIONS
-# --class <GENERAL> | <GENERAL>,<INSTANCE>
-#     Defines the window class hint on Linux.
-#     When only the general class is passed, instance will be set to the same value.
-#     Default: Alacritty,Alacritty
-# -e, --command <COMMAND>...
-#     Command and args to execute (must be last argument).
-# --config-file <CONFIG_FILE>
-#     Specify alternative configuration file.
-#     Alacritty doesn't create the config file for you, but it looks for one in the following locations on UNIX systems:
-#             $XDG_CONFIG_HOME/alacritty/alacritty.toml
-#             $XDG_CONFIG_HOME/alacritty.toml
-#             $HOME/.config/alacritty/alacritty.toml
-#             $HOME/.alacritty.toml
-#     On Windows, the config file will be looked for in:
-#             %APPDATA%\alacritty\alacritty.toml
-# --embed <PARENT>
-#     X11 window ID to embed Alacritty within (decimal or hexadecimal with 0x prefix).
-# -o, --option <OPTION>...
-#     Override configuration file options.
-#     Example: alacritty -o 'cursor.style="Beam"'
-# --socket <SOCKET>
-#     Path for IPC socket creation.
-# -T, --title <TITLE>
-#     Defines the window title.
-#     Default: Alacritty
-# --working-directory <WORKING_DIRECTORY>
-#     Start the shell in the specified working directory.
-# SUBCOMMANDS
-# msg
-#     Send IPC socket messages (see alacritty-msg(1)).
-# migrate
-#     Migrate the configuration file.
-#     -c, --config-file <CONFIG_FILE>
-#         Path to the configuration file.
-#     -d, --dry-run
-#         Only output TOML config to STDOUT.
-#     -i, --skip-imports
-#         Do not recurse over imports.
-#     --skip-renames
-#         Do not move renamed fields to their new location.
-#     -s, --silent
-#         Do not output to STDOUT.
-#     -h, --help
-#         Print help information.
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║                               Alacritty Help                             ║
+# ╠══════════════════════════════════════════════════════════════════════════╣
+# ║ General Options:                                                         ║
+# ║   -h, --help                     Prints help information.                ║
+# ║   --hold                         Remain open after child exits.         ║
+# ║   --daemon                       Do not spawn initial window.           ║
+# ║   --print-events                 Print events to STDOUT.                ║
+# ║   -q, -qq                        Reduce verbosity.                       ║
+# ║   --ref-test                     Generates ref test.                     ║
+# ║   -v, -vvv                       Increase verbosity.                     ║
+# ║   -V, --version                  Print version.                          ║
+# ║                                                                        ║
+# ║ Launch Options:                                                         ║
+# ║   --class <GEN>[,<INST>]        Set window class (X11/Wayland).         ║
+# ║   -e, --command <CMD>...        Run command (last arg).                 ║
+# ║   --config-file <FILE>          Use alternative config file.            ║
+# ║   --embed <WIN_ID>              Embed in X11 window.                    ║
+# ║   -o, --option <OPT>...         Override config options.                ║
+# ║   --socket <PATH>               IPC socket path.                        ║
+# ║   -T, --title <TITLE>           Set window title.                       ║
+# ║   --working-directory <DIR>     Start in directory.                     ║
+# ╠══════════════════════════════════════════════════════════════════════════╣
+# ║ Subcommands:                                                             ║
+# ║   msg                             Send IPC messages.                    ║
+# ║   migrate                         Migrate config file.                  ║
+# ║     -c, --config-file <FILE>      Path to config file.                 ║
+# ║     -d, --dry-run                 Output TOML to STDOUT.               ║
+# ║     -i, --skip-imports            Skip import recursion.               ║
+# ║     --skip-renames                Don’t rename fields.                 ║
+# ║     -s, --silent                  Suppress output.                     ║
+# ╠══════════════════════════════════════════════════════════════════════════╣
+# ║ IPC Tool (alacritty-msg):                                               ║
+# ║   -s, --socket <SOCKET>         IPC socket path                         ║
+# ║                                                                        ║
+# ║   create-window:                 Open new window                         ║
+# ║     --hold                      Keep open after child exits             ║
+# ║     -T, --title <TITLE>         Set window title                        ║
+# ║     -o, --option <OPT>...       Override config                         ║
+# ║     -e, --command <CMD>...      Run command                             ║
+# ║                                                                        ║
+# ║   config:                        Update runtime config                  ║
+# ║     <OPTIONS>                   E.g. 'cursor.style="Beam"'             ║
+# ║     -r, --reset                 Clear all runtime changes              ║
+# ║     -w, --window-id <ID>        Apply to specific window               ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
 
-# Default Keymaps
+
+# ## Alacritty Default Keybindings Overview
+
 # MOUSE BINDINGS
 # mouse 	mods 	action
 # "Right" 		"ExpandSelection"
@@ -345,85 +331,3 @@ bindings = [
 # "NumpadAdd" 	"Control" 		"IncreaseFontSize"
 # "-" 	"Control" 		"DecreaseFontSize"
 # "NumpadSubtract" 	"Control" 		"DecreaseFontSize"
-# Windows only
-# key 	mods 	mode 	action
-# "Enter" 	"Alt" 		"ToggleFullscreen"
-# macOS only
-# key 	mods 	mode 	action / chars
-# "K" 	"Command" 	"~Vi|~Search" 	chars: "\u000c"
-# "K" 	"Command" 	"~Vi|~Search" 	"ClearHistory"
-# "0" 	"Command" 		"ResetFontSize"
-# "=" 	"Command" 		"IncreaseFontSize"
-# "+" 	"Command" 		"IncreaseFontSize"
-# "NumpadAdd" 	"Command" 		"IncreaseFontSize"
-# "-" 	"Command" 		"DecreaseFontSize"
-# "NumpadSubtract" 	"Command" 		"DecreaseFontSize"
-# "V" 	"Command" 	"~Vi" 	"Paste"
-# "V" 	"Command" 	"Vi|Search" 	"Paste"
-# "C" 	"Command" 		"Copy"
-# "C" 	"Command" 	"Vi|~Search" 	"ClearSelection"
-# "H" 	"Command" 		"Hide"
-# "H" 	"Command|Alt" 		"HideOtherApplications"
-# "M" 	"Command" 		"Minimize"
-# "Q" 	"Command" 		"Quit"
-# "W" 	"Command" 		"Quit"
-# "N" 	"Command" 		"CreateNewWindow"
-# "T" 	"Command" 		"CreateNewTab"
-# "F" 	"Command|Control" 		"ToggleFullscreen"
-# "F" 	"Command" 	"~Search" 	"SearchForward"
-# "B" 	"Command" 	"~Search" 	"SearchBackward"
-# "]" 	"Command|Shift" 		"SelectNextTab"
-# "[" 	"Command|Shift" 		"SelectPreviousTab"
-# "Tab" 	"Command" 		"SelectNextTab"
-# "Tab" 	"Command|Shift" 		"SelectPreviousTab"
-# "1" 	"Command" 		"SelectTab1"
-# "2" 	"Command" 		"SelectTab2"
-# "3" 	"Command" 		"SelectTab3"
-# "4" 	"Command" 		"SelectTab4"
-# "5" 	"Command" 		"SelectTab5"
-# "6" 	"Command" 		"SelectTab6"
-# "7" 	"Command" 		"SelectTab7"
-# "8" 	"Command" 		"SelectTab8"
-# "9" 	"Command" 		"SelectLastTab"
-
-# NAME
-# alacritty-msg - Send messages to Alacritty.
-# SYNOPSIS
-# This command communicates with running Alacritty instances through a socket, making it possible to control Alacritty without directly accessing it.
-# OPTIONS
-# -s, --socket <SOCKET>
-#     Path for IPC socket communication.
-# MESSAGES
-# create-window
-#     Create a new window in the same Alacritty process.
-#     FLAGS
-#         --hold
-#             Remain open after child process exits.
-#     OPTIONS
-#         --working-directory <WORKING_DIRECTORY>
-#             Start the shell in the specified working directory.
-#         -T, --title <TITLE>
-#             Defines the window title.
-#             Default: Alacritty
-#         --class <GENERAL> | <GENERAL>,<INSTANCE>
-#             Defines window class/app_id on X11/Wayland.
-#             Default: Alacritty,Alacritty
-#         -o, --option <OPTION>...
-#             Override configuration file options.
-#             Example: alacritty msg create-window -o 'cursor.style="Beam"'
-#         -e, --command <COMMAND>...
-#             Command and args to execute (must be last argument).
-# config
-#     Update the Alacritty configuration.
-#     ARGS
-#         <CONFIG_OPTIONS>...
-#             Configuration file options.
-#             Example: alacritty msg config 'cursor.style="Beam"'
-#     FLAGS
-#         -r, --reset
-#             Clear all runtime configuration changes.
-#     OPTIONS
-#         -w, --window-id <WINDOW_ID>
-#             Window ID for the new config.
-#             Use -1 to apply this change to all windows.
-#             Default: $ALACRITTY_WINDOW_ID
