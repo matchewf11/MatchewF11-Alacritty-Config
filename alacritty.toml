@@ -3,32 +3,16 @@ import = [
 	"kanagawa.toml",
 	"keymaps.toml",
 ]
-working_directory = "None" # start in previous working directory
-live_config_reload = true
-ipc_socket = true # unix-only
 
 #[env]
 #WINIT_X11_SCALE_FACTOR = "1.0"
 
 [window]
-dimensions = { columns = 0, lines = 0} # go to default but can limit size
-position = "None" #window manage handles it
-padding = {x = 0, y = 0 } # no padding
-dynamic_padding = false # doesnt matter cuz no padding
-decorations = "None" # I use i3 instead
-opacity = 1.0
-blur = false
-startup_mode = "Windowed"
+decorations = "None"
 title = "Matchew Terminal"
-dynamic_title = true
-class = { instance = "Alacritty", general = "Alacritty" } # (Linux/BSD only)
-decorations_theme_variant = "None"
 resize_increments = true
-level = "Normal"
 
-[scrolling]
-history = 10000
-multiplier = 3
+#[scrolling]
 
 [font]
 normal = { family = "Hack Nerd Font Mono", style = "Regular" }
@@ -36,34 +20,18 @@ bold = { family = "Hack Nerd Font Mono", style = "Bold" }
 italic = { family = "Hack Nerd Font Mono", style = "Italic" }
 bold_italic = { family = "Hack Nerd Font Mono", style = "Bold Italic" }
 size = 13.50
-offset = { x = 0, y = 0 }
 builtin_box_drawing = false # change this if glyphs look weird
 
-[bell]
-animation = "Linear"
-duration = 0
-color = "#ffffff"
-command = "None"
+#[bell]
 
 [selection]
-semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 save_to_clipboard = true
 
-[cursor]
-style.shape = "Beam"
-style.blinking = "Never"
-vi_mode_style.shape = "Block"
-vi_mode_style.blinking = "Off"
-#blink_interval = 750
-#blink_timeout = 5
-unfocused_hollow = true
-thickness = 0.15 # 0 -> 1.0
+#[cursor]
 
 [terminal]
 shell = { program = "/usr/bin/zsh", args = ["-l"] }
-osc52 = "OnlyCopy"
 
-[mouse]
-hide_when_typing = false
+#[mouse]
 # bindings = [{ <mouse>, <mods>, <mode>, <command> | <chars> | <action> },]
 
